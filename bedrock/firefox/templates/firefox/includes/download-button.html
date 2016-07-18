@@ -7,7 +7,10 @@
     <p role="heading" class="download-heading">{{ _('Download Firefox') }} — {{ locale_name|safe }}</p>
     <ul>
       {% for plat in builds -%}
-        <li><a href="{{ plat.download_link_direct or plat.download_link }}" class="download-link button green">{{ plat.os_arch_pretty or plat.os_pretty }}</a></li>
+        <li><a href="{{ plat.download_link_direct or plat.download_link }}" class="download-link button green"
+          {% if plat.os == 'android' %}data-link-type="download" data-download-os="Android"
+          {% elif plat.os == 'ios' %}data-link-type="download" data-download-os="iOS"
+          {% else %}data-link-type="download" data-download-os="Desktop"{% endif %}>{{ plat.os_arch_pretty or plat.os_pretty }}</a></li>
       {%- endfor %}
     </ul>
   </div>
